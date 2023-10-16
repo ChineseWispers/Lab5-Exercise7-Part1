@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+<title>Calculator Example</title>
+</head>
+<body>
+    <input id="num1">
+    <span>+</span>
+    <input id="num2">
+    <span>=</span>
+    <button onclick="calcFunction(this)">Add</button>
+    <button onclick="calcFunction(this)">Subtract</button>
+    <button onclick="calcFunction(this)">Multiply</button>
+    <button onclick="calcFunction(this)">Divide</button>
+<span>Result
+<span id="result"></span>
+</span>
+</body>
+
+<script>
+function calcFunction(element) {
+  operator = element.innerHTML.toLowerCase()
+  const num1 = document.getElementById('num1').value;
+  const num2 = document.getElementById('num2').value;
+  fetch(`/calculator/${operator}?num1=${num1}&num2=${num2}`)
+  .then(response => response.json())
+  .then(data => {
+  document.getElementById("result").innerHTML = data.result;;
+})
+}
+
+</script>
+</html>
